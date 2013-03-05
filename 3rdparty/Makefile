@@ -24,7 +24,7 @@ else
 	else
 		ARCH = x86-linux
 		CONFIG_ARGS =
-		ARCH_FLAGS =
+		ARCH_FLAGS = -fPIC
 		MAKE_ARGS =
 	endif
 endif

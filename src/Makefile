@@ -33,6 +33,7 @@ CXXFLAGS += `pkg-config glib-2.0 --cflags` `pkg-config libxml-2.0 --cflags` `pkg
 ifeq ($(MACOSX_STATIC),1)
 	LDFLAGS += ../3rdparty/wv2-0.2.3/src/.libs/libwv2.a /opt/local/lib/libglib-2.0.a /opt/local/lib/libintl.a /opt/local/lib/libgsf-1.a /opt/local/lib/libgobject-2.0.a /opt/local/lib/libffi.a /opt/local/lib/libgthread-2.0.a /opt/local/lib/libbz2.a /opt/local/lib/libiconv.a /opt/local/lib/libxml2.a /opt/local/lib/libz.a -framework CoreServices
 else
+	CXXFLAGS += -fPIC
 	LDFLAGS += -L../3rdparty/wv2-0.2.3/src/.libs -lwv2 `pkg-config glib-2.0 --libs` `pkg-config libxml-2.0 --libs` -lz
 endif
 	SOPRE = lib
