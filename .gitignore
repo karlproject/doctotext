@@ -1,0 +1,9 @@
+3rdparty/unzip101e
+3rdparty/wv2-0.2.3
+build
+*.o
+tests/c_api_test
+tests/cpp_api_test
+version.h
+*.so
+src/doctotext
