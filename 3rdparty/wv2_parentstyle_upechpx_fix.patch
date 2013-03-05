@@ -1,0 +1,22 @@
+--- src/styles.cpp	2012-05-28 02:04:34.596764557 +0200
++++ src/styles.cpp.parentstyle_upechpx_fix	2012-05-28 02:08:06.494907633 +0200
+@@ -597,16 +597,16 @@
+     std::vector<SprmEntry> source;
+     analyzeGrpprl( srcGrpprl, cbUPX, source, version );
+ 
+-    U8* baseGrpprl = parentStyle->m_upechpx->grpprl;
++    U8* baseGrpprl = parentStyle->upechpx().grpprl;
+     std::vector<SprmEntry> base;
+-    analyzeGrpprl( baseGrpprl, parentStyle->m_upechpx->cb, base, version );
++    analyzeGrpprl( baseGrpprl, parentStyle->upechpx().cb, base, version );
+ 
+     // Sort the created vectors
+     std::sort( source.begin(), source.end() );
+     std::sort( base.begin(), base.end() );
+ 
+     // Get enough room for the sprms of both chpxes
+-    m_upechpx->grpprl = new U8[ parentStyle->m_upechpx->cb + cbUPX ];
++    m_upechpx->grpprl = new U8[ parentStyle->upechpx().cb + cbUPX ];
+     U16 destCount = 0;
+ 
+     std::vector<SprmEntry>::const_iterator sourceIt = source.begin();

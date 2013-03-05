@@ -1,0 +1,55 @@
+--- ustring.h	2008-10-10 00:18:18.000000000 +0200
++++ ustring.h.expotential_growth	2008-10-10 17:03:47.000000000 +0200
+@@ -200,6 +200,7 @@
+ 
+       UChar *dat;
+       int len;
++      int allocated;
+       int rc;
+       static Rep null;
+     };
+--- ustring.cpp	2008-10-10 00:18:23.000000000 +0200
++++ ustring.cpp.expotential_growth	2008-10-10 17:04:34.000000000 +0200
+@@ -174,7 +174,7 @@
+ }
+ 
+ UChar UChar::null;
+-UString::Rep UString::Rep::null = { 0, 0, 1 };
++UString::Rep UString::Rep::null = { 0, 0, 0, 1 };
+ UString UString::null;
+ static char *statBuffer = 0L;
+ 
+@@ -231,6 +231,7 @@
+   Rep *r = new Rep;
+   r->dat = d;
+   r->len = l;
++  r->allocated = l;
+   r->rc = 1;
+ 
+   return r;
+@@ -334,11 +335,20 @@
+ UString &UString::append(const UString &t)
+ {
+   int l = length();
+-  UChar *n = allocateChars( l+t.length() );
+-  memcpy(n, data(), l * sizeof(UChar));
+-  memcpy(n+l, t.data(), t.length() * sizeof(UChar));
+-  release();
+-  rep = Rep::create(n, l + t.length());
++  if (l + t.length() > rep->allocated)
++  {
++    UChar *n = allocateChars((l+t.length()) * 2);
++    memcpy(n, data(), l * sizeof(UChar));
++    memcpy(n+l, t.data(), t.length() * sizeof(UChar));
++    release();
++    rep = Rep::create(n, l + t.length());
++    rep->allocated *= 2;
++  }
++  else
++  {
++    memcpy(rep->data() + l, t.data(), t.length() * sizeof(UChar));
++    rep->len += t.length();
++  }
+ 
+   return *this;
+ }

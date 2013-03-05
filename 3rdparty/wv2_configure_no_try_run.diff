@@ -1,0 +1,106 @@
+--- configure	2006-06-12 19:12:24.000000000 +0200
++++ configure.without_try_run	2006-07-30 19:49:40.000000000 +0200
+@@ -27027,103 +27027,6 @@
+ ac_compiler_gnu=$ac_cv_c_compiler_gnu
+ 
+ 
+-echo "$as_me:$LINENO: checking whether the iconv installation is complete enough" >&5
+-echo $ECHO_N "checking whether the iconv installation is complete enough... $ECHO_C" >&6
+-if test "$cross_compiling" = yes; then
+-  iconvFlag="no"
+-else
+-  cat >conftest.$ac_ext <<_ACEOF
+-/* confdefs.h.  */
+-_ACEOF
+-cat confdefs.h >>conftest.$ac_ext
+-cat >>conftest.$ac_ext <<_ACEOF
+-/* end confdefs.h.  */
+-
+-#ifdef HAVE_ICONV_H
+-#include <iconv.h>
+-#endif
+-#ifdef HAVE_SYS_ICONV_H
+-#include <sys/iconv.h>
+-#endif
+-#include <stdlib.h>
+-
+-int check( const char* from, const char* to )
+-{
+-    iconv_t myConverter = iconv_open( to, from );
+-
+-    if ( myConverter != (iconv_t)-1 ) {
+-	iconv_close( myConverter );
+-	return 0;
+-    }
+-    else
+-	return 1;
+-}
+-
+-int main(int argc, char** argv)
+-{
+-    const char* from[] = { "CP874", "CP932", "CP936", "CP949",
+-			   "CP950", "CP1250", "CP1251", "CP1252",
+-			   "CP1253", "CP1254", "CP1255", "CP1256",
+-			   "CP1257", "koi8-r", 0 };
+-    const char* to[] = { "UNICODELITTLE", "UNICODEBIG", 0 };
+-    int fromIndex = 0;
+-    int toIndex = 0;
+-
+-    while ( to[ toIndex ] != 0 ) {
+-	while( from[ fromIndex ] != 0 ) {
+-	    if ( check( from[ fromIndex ], to[ toIndex ] ) != 0 )
+-		exit( 1 );
+-	    fromIndex = fromIndex + 1;
+-	}
+-	toIndex = toIndex + 1;
+-	fromIndex = 0;
+-    }
+-    exit( 0 );
+-}
+-
+-_ACEOF
+-rm -f conftest$ac_exeext
+-if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
+-  (eval $ac_link) 2>&5
+-  ac_status=$?
+-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+-  (exit $ac_status); } && { ac_try='./conftest$ac_exeext'
+-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+-  (eval $ac_try) 2>&5
+-  ac_status=$?
+-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+-  (exit $ac_status); }; }; then
+-  iconvFlag="yes"
+-else
+-  echo "$as_me: program exited with status $ac_status" >&5
+-echo "$as_me: failed program was:" >&5
+-sed 's/^/| /' conftest.$ac_ext >&5
+-
+-( exit $ac_status )
+-iconvFlag="no"
+-fi
+-rm -f core *.core gmon.out bb.out conftest$ac_exeext conftest.$ac_objext conftest.$ac_ext
+-fi
+-
+-if test "x$iconvFlag" = "xyes"; then
+-	echo "$as_me:$LINENO: result: yes" >&5
+-echo "${ECHO_T}yes" >&6
+-else
+-	echo "$as_me:$LINENO: result: no" >&5
+-echo "${ECHO_T}no" >&6
+-	echo
+-	echo "wv2 depends on a modern iconv installation, supporting UNICODELITTLE and"
+-	echo "UNICODEBIG. The detected iconv version doesn't support these conversions."
+-	echo
+-	echo "Please get a new libiconv from http://www.gnu.org/software/libiconv/"
+-	echo "You might want to install the library to some alternative directory, in"
+-	echo "order not to overwrite your current installation. Please use the option"
+-	echo "--with-libiconv=DIR to specify the location."
+-	echo
+-	{ { echo "$as_me:$LINENO: error: * * * No iconv support - unable to continue * * *" >&5
+-echo "$as_me: error: * * * No iconv support - unable to continue * * *" >&2;}
+-   { (exit 1); exit 1; }; }
+-fi
+ 
+ CPPFLAGS=$_cppflags
+ LDFLAGS=$_ldflags

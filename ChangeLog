@@ -1,0 +1,96 @@
+Version 0.13.0
+	* Initial Mac OS X port
+	* Initial implementation of shared library
+	* C language API added to allow using C++ library from C and other languages
+	* Universal binary (i386, x86_64) for Mac OS X
+	* Static linking of 3rdparty libraries option for Mac OS X
+	* Cleanups
+	* First parser selection is according to file extension
+	* First parser used can be choosen via command line
+	* Embedded XLS Workbooks support in DOC files
+	* Table cells encoding problems in DOC files fixed.
+	* Case insensitive file extension matching.
+	* Do not try other parsers if parser selected by file extension fails.
+	* New XLS parser.
+	* Small fix in XLS numbers formatting.
+	* Small fix in parsing XLS shared string table.
+	* Locating files in zip archives (ODF, OOXML) optimized.
+	* Initial PPT format support. ODP, PPT, PPTX files added to automatic tests.
+	* Fixes in DOC and XLS parsers.
+	* Verbose logging can be turned on and off.
+	* Logs can be redirected to other C++ stream than standard cerr.
+	* Redesigned C++ API.
+	* Debug and release versions separated.
+	* End of paragraph special symbols support fixed.
+	* Download and use more precompiled libraries
+	* Small and big compilation fixes
+	* Headers and footers support in DOC files added
+
+Version 0.12.0:
+	* Formatting tables optimized
+	* Build-in libxml2 library upgraded to version 2.7.7
+	* Initial xls format support
+	* Better default table formatting
+	* Support for DOC format moved to DOCParser class
+	* RTFParser API uses standard string class only
+	* Cleanups
+	* Error message is not displayed when checking for ODF or OOXML format fails
+	* Table parsing in DOC files improved
+	* Link parsing in DOC files improved
+	* Cleanups
+	* Copyright headers updated
+	* Packages in bzip2 format instead of gzip
+	* ODS (OpenOffice Calc) files added to automatic tests
+	* VERSION file added to binary packages
+	* Download and use precompiled libiconv binaries
+	* Encoding problems in XLS format support on win32 fixed
+	* Use MAKE variable executing make recursively
+
+Version 0.11.0:
+	* zip archives (ODF, OOXML) support moved to DocToTextUnzip class
+	* --unzip-cmd option implemented to use specified command to unzip files from archives (ODF, OOXML) instead of build-in decompression library
+	* --unzip-cmd fixed on win32 - replacing slashes with backslashes in filename
+	* --fix-xml option implemented to try to fix corrupted xml files (ODF, OOXML) using custom recursive descent parser before processing
+	* some ODF and OOXML formatting issues fixed
+	* UTF-8 support in corrupted xml files (ODF, OOXML) fixing routines
+	* Makefile dependencies fixed
+	* --strip-xml option implemented to strip xml tags instead of parsing them (ODF, OOXML)
+	* Entities support in corrupted xml files (ODF, OOXML) fixing routines
+	* max tag depth security limit of libxml supported in corrupted xml files (ODF, OOXML) fixing routines
+	* a lot of compilation warnings fixed
+	* small fix for encoding support in RTF parser
+	* --strip-xml option removes duplicated attributes
+	* ChangeLog file added to binary releases
+	* copyright headers updated
+
+Version 0.10.0:
+	* Command line arguments added to change tables, lists and links formatting (for odt files only)
+	* glib upgraded to 2.14.5
+	* initial OOXML formats support
+	* Parsing tables in DOC fixed
+	* support for mixed character encodings RTF files created using MS WordPad or MS Word (thanks to John Estrada)
+	* ioapi of unzip library changed from winapi to fopen api in win32 version - winapi io in unzip library caused some problems, for example xlsx file could not be open when is open in MS Word
+	* allocating memory using expotential grow in UString - big performance boost in rtf parser
+	* copyright headers updated
+
+
+Version 0.9.0:
+	* patch for gettext fixing duplicate case value errors
+	* glib upgraded to 2.12.11 - duplicate case value errors
+	* wstring changed to UString in rtf parser - problems on mingw
+	* initial support of charset in rtf parser
+	* initial odt format support
+	* performing automatic tests after the source code is compiled
+	* memory error fixed - unzReadCurrentFile() does not put NULL at the end of the buffer
+	* counting function added
+	* number of characters read from file was changed to corect value
+
+
+Version 0.2.0:
+	* rtf format support
+
+Version 0.1.0:
+	* initial implementation
+	* output in utf-8 encoding
+	* help, copyright headers, README
+	* paragraphs support
