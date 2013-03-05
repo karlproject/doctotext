@@ -82,7 +82,9 @@ endif
 endif
 	cp src/doctotext$(EXEEXT) build
 	cp src/$(SOPRE)doctotext$(SOEXT) build/
-	cp src/{plain_text_extractor,formatting_style,doctotext_c_api}.h build/
+	cp src/plain_text_extractor.h build/
+	cp src/formatting_style.h build/
+	cp src/doctotext_c_api.h build/
 	cp ChangeLog VERSION build
 	$(MAKE) -C tests
 
